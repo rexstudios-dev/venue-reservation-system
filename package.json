@@ -1,6 +1,6 @@
 {
   "name": "venue-reservation-system",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A flexible JavaScript library for managing reservations in various venues with visual representation",
   "type": "module",
   "main": "index.js",
