@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Sistema de Reservas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2 {
+            text-align: center;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .venue-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .venue-selector button {
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .venue-selector button.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .map-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        
+        .screen {
+            background-color: #ddd;
+            color: #333;
+            text-align: center;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        .available { background-color: #4CAF50; }
+        .selected { background-color: #FFC107; }
+        .occupied { background-color: #F44336; }
+        
+        .reservation-form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .selected-seats {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .confirmation {
+            display: none;
+            border: 1px solid #4CAF50;
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .error {
+            color: #F44336;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Demo Sistema de Reservas</h1>
+    
+    <div class="container">
+        <div class="venue-selector">
+            <button id="cinema-btn" class="active">Cine</button>
+            <button id="restaurant-btn">Restaurante</button>
+            <button id="conference-btn">Sala de Conferencias</button>
+        </div>
+        
+        <div class="map-container">
+            <div id="cinema-view">
+                <div class="screen">PANTALLA</div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color available"></div>
+                        <span>Disponible</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color selected"></div>
+                        <span>Seleccionado</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color occupied"></div>
+                        <span>Ocupado</span>
+                    </div>
+                </div>
+                <canvas id="venue-map" width="800" height="400"></canvas>
+            </div>
+        </div>
+        
+        <div class="reservation-form">
+            <h2>Reservar Asientos</h2>
+            <div class="selected-seats">
+                Asientos seleccionados: <span id="selected-seats">Ninguno</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="customer-name">Nombre:</label>
+                <input type="text" id="customer-name" placeholder="Ingresa tu nombre">
+            </div>
+            
+            <div class="form-group">
+                <label for="customer-email">Email:</label>
+                <input type="email" id="customer-email" placeholder="Ingresa tu email">
+            </div>
+            
+            <div class="form-group">
+                <label for="customer-phone">Teléfono:</label>
+                <input type="tel" id="customer-phone" placeholder="Ingresa tu teléfono">
+            </div>
+            
+            <button id="reserve-btn" disabled>Reservar Ahora</button>
+            <div id="error-message" class="error"></div>
+        </div>
+        
+        <div id="confirmation" class="confirmation">
+            <h2>¡Reserva Confirmada!</h2>
+            <p><strong>ID de Reserva:</strong> <span id="reservation-id"></span></p>
+            <p><strong>Asientos:</strong> <span id="confirmation-seats"></span></p>
+            <p><strong>Nombre:</strong> <span id="confirmation-name"></span></p>
+            <p><strong>Fecha y Hora:</strong> <span id="confirmation-time"></span></p>
+            <button id="new-reservation-btn">Nueva Reserva</button>
+        </div>
+    </div>
+
+    <script src="venue-reservation.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
