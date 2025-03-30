@@ -1,0 +1,31 @@
+{
+  "name": "venue-reservation-system",
+  "version": "1.0.0",
+  "description": "A flexible JavaScript library for managing reservations in various venues with visual representation",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "reservation",
+    "booking",
+    "seats",
+    "tables",
+    "venue",
+    "cinema",
+    "restaurant",
+    "conference",
+    "svg"
+  ],
+  "author": "Rex Dev (https://github.com/rexstudios-dev)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rexstudios-dev/venue-reservation-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rexstudios-dev/venue-reservation-system/issues"
+  },
+  "homepage": "https://github.com/rexstudios-dev/venue-reservation-system#readme"
+}
